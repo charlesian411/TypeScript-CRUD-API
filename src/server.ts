@@ -1,4 +1,5 @@
 // src/server.ts
+import path from 'path';
 import express, { Application } from 'express';
 import cors from 'cors';
 import { errorHandler } from './middleware/errorHandler';
@@ -11,6 +12,9 @@ const app: Application = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, '../public')));
 
 // API Routes
 app.use('/users', usersController);
